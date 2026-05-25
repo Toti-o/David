@@ -1,6 +1,7 @@
 /* David J. Devine Author Website
  * Cinematic Thriller Design - Vanilla HTML/CSS/JS
  * Green accent color, real photography, premium feel
+ * FIXED: Image placement, responsiveness, overflow
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap');
@@ -156,11 +157,13 @@ nav.scrolled {
   padding-top: 6rem;
 }
 
+/* FIXED: Hero background image – cover properly, no distortion */
 .hero-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   z-index: -2;
 }
 
@@ -364,11 +367,18 @@ section.alt {
 /* Book Card */
 .book-card {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* FIXED: Book cover – proper sizing, object-fit, no overflow */
 .book-cover {
   width: 100%;
   max-width: 280px;
+  height: auto;
+  aspect-ratio: 2 / 3; /* Typical book ratio */
+  object-fit: cover;
   margin: 0 auto 1.5rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(85, 200, 100, 0.1);
   transition: all 0.3s ease;
@@ -395,6 +405,17 @@ section.alt {
 .book-card p {
   font-size: 0.95rem;
   margin-bottom: 1.5rem;
+}
+
+/* FIXED: Book details page image placement */
+.book-detail-cover {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  object-fit: contain;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  margin-bottom: 2rem;
+  display: block;
 }
 
 /* Reveal animation */
@@ -443,9 +464,15 @@ section.alt {
   }
 }
 
+/* FIXED: Author photo – proper sizing, centered on mobile, object-fit */
 .author-photo {
   width: 100%;
   max-width: 380px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(85, 200, 100, 0.15);
   filter: grayscale(15%);
 }
@@ -600,6 +627,16 @@ footer {
 
   .author-grid {
     grid-template-columns: 1fr;
+  }
+  
+  /* FIXED: smaller book covers on mobile */
+  .book-cover {
+    max-width: 220px;
+  }
+  
+  .book-detail-cover {
+    max-width: 240px;
+    margin: 0 auto 2rem;
   }
 }
 
