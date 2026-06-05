@@ -1,776 +1,639 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="About David J. Devine - Irish-American novelist and author of Hibernia and UnCommonwealth.">
-  <meta name="keywords" content="David J. Devine, author, novelist, biography">
-  <title>About David J. Devine – Author</title>
-  <style>
-    /* ---------- RESET & BASE ---------- */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Lora', serif;
-      background: oklch(0.08 0.005 240);
-      color: oklch(0.92 0.015 75);
-      line-height: 1.6;
-      overflow-x: hidden;
-    }
-
-    /* ---------- TYPOGRAPHY ---------- */
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 900;
-      line-height: 1.1;
-    }
-
-    h1 {
-      font-size: clamp(2.8rem, 7vw, 5.5rem);
-      margin-bottom: 1.5rem;
-    }
-
-    h2 {
-      font-size: clamp(2rem, 5vw, 3.5rem);
-      margin-bottom: 1.5rem;
-    }
-
-    h3 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    p {
-      font-size: 1.05rem;
-      line-height: 1.85;
-      margin-bottom: 1.5rem;
-      color: oklch(0.68 0.015 75);
-    }
-
-    strong {
-      color: oklch(0.82 0.015 75);
-      font-weight: 600;
-    }
-
-    /* ---------- NAVIGATION ---------- */
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 1000;
-      padding: 1.5rem 2rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      transition: all 0.3s ease;
-      background: transparent;
-    }
-
-    nav.scrolled {
-      background: rgba(8, 9, 14, 0.95);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 1rem 2rem;
-    }
-
-    .nav-brand {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.1rem;
-      font-weight: 900;
-      letter-spacing: 0.05em;
-      text-decoration: none;
-      color: oklch(0.92 0.015 75);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .nav-brand::before {
-      content: '';
-      display: block;
-      width: 8px;
-      height: 8px;
-      background: oklch(0.55 0.15 142);
-      border-radius: 50%;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 2rem;
-      list-style: none;
-    }
-
-    .nav-links a {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.75rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      text-decoration: none;
-      color: oklch(0.65 0.015 75);
-      transition: color 0.3s ease;
-      position: relative;
-    }
-
-    .nav-links a::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: oklch(0.55 0.15 142);
-      transition: width 0.3s ease;
-    }
-
-    .nav-links a:hover {
-      color: oklch(0.92 0.015 75);
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
-    }
-
-    .nav-links a.active {
-      color: oklch(0.55 0.15 142);
-    }
-
-    /* ---------- HERO SECTION ---------- */
-    .hero {
-      position: relative;
-      min-height: 50vh;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      overflow: hidden;
-      padding-top: 6rem;
-    }
-
-    .hero-bg {
-      position: absolute;
-      inset: 0;
-      background-size: cover;
-      background-position: center 30%;
-      background-repeat: no-repeat;
-      z-index: -2;
-    }
-
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to right, rgba(8,9,14,0.92) 0%, rgba(8,9,14,0.75) 40%, rgba(8,9,14,0.6) 60%, rgba(8,9,14,0.85) 100%),
-                  linear-gradient(to bottom, rgba(8,9,14,0.3) 0%, rgba(8,9,14,0) 30%, rgba(8,9,14,0) 60%, rgba(8,9,14,0.8) 100%);
-      z-index: -1;
-    }
-
-    .hero-content {
-      position: relative;
-      z-index: 10;
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-      width: 100%;
-    }
-
-    .hero-eyebrow {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 2rem;
-    }
-
-    .hero-eyebrow-line {
-      display: block;
-      width: 2.5rem;
-      height: 1px;
-      background: oklch(0.55 0.15 142);
-    }
-
-    .hero-eyebrow-text {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: oklch(0.55 0.15 142);
-    }
-
-    /* ---------- BUTTONS ---------- */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 0.875rem 1.75rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      text-decoration: none;
-      border: 2px solid oklch(0.55 0.15 142);
-      background: transparent;
-      color: oklch(0.55 0.15 142);
-      cursor: pointer;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      z-index: 1;
-    }
-
-    .btn::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: oklch(0.55 0.15 142);
-      z-index: -1;
-      transition: left 0.3s ease;
-    }
-
-    .btn:hover {
-      color: oklch(0.08 0.005 240);
-      transform: translateY(-2px);
-    }
-
-    .btn:hover::before {
-      left: 0;
-    }
-
-    .btn-primary {
-      background: oklch(0.55 0.15 142);
-      color: oklch(0.08 0.005 240);
-      border-color: oklch(0.55 0.15 142);
-    }
-
-    .btn-primary::before {
-      background: oklch(0.42 0.12 142);
-    }
-
-    .btn-primary:hover {
-      color: oklch(0.92 0.015 75);
-    }
-
-    /* ---------- CONTAINER & SECTIONS ---------- */
-    .container {
-      max-width: 1280px;
-      margin: 0 auto;
-      padding: 0 1.5rem;
-    }
-
-    section {
-      padding: 4rem 0;
-    }
-
-    section.alt {
-      background: oklch(0.10 0.005 240);
-    }
-
-    /* ---------- GRID SYSTEMS ---------- */
-    .grid {
-      display: grid;
-      gap: 2rem;
-    }
-
-    .grid-2 {
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    }
-
-    @media (min-width: 1024px) {
-      .grid-2 {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* ---------- AUTHOR GRID & PHOTO (FIXED) ---------- */
-    .author-grid {
-      display: grid;
-      gap: 3rem;
-      align-items: start;
-    }
-
-    @media (min-width: 1024px) {
-      .author-grid {
-        grid-template-columns: 1fr 2fr;
-      }
-    }
-
-    /* Author photo container */
-    .author-photo-container {
-      position: relative;
-    }
-
-    /* FIXED: Author photo – proper sizing, no distortion, responsive */
-    .author-photo {
-      width: 100%;
-      max-width: 380px;         /* comfortable limit */
-      height: auto;
-      aspect-ratio: 4 / 5;       /* elegant portrait proportion */
-      object-fit: cover;         /* clean crop, no stretching */
-      display: block;
-      border-radius: 4px;
-      margin-bottom: 1rem;
-      box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(85, 200, 100, 0.15);
-      filter: grayscale(15%);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .author-photo:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 40px 96px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(85, 200, 100, 0.3);
-    }
-
-    /* Desktop: image left-aligned */
-    @media (min-width: 1024px) {
-      .author-grid > div:first-child {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .author-photo {
-        margin-left: 0;
-        margin-right: auto;
-      }
-    }
-
-    /* Tablet & mobile: centered, smaller max-width */
-    @media (max-width: 1023px) {
-      .author-photo {
-        max-width: 280px;
-        margin-left: auto;
-        margin-right: auto;
-      }
-      .author-location {
-        left: 50%;
-        transform: translateX(-50%);
-        bottom: 1rem;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .author-photo {
-        max-width: 240px;
-      }
-    }
-
-    /* Location badge */
-    .author-location {
-      position: absolute;
-      bottom: 1rem;
-      left: 1rem;
-      background: rgba(8, 9, 14, 0.9);
-      backdrop-filter: blur(8px);
-      padding: 0.5rem 0.875rem;
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
-      color: oklch(0.65 0.015 75);
-      display: inline-flex;
-      align-items: center;
-      gap: 0.5rem;
-      border-radius: 2px;
-      z-index: 2;
-    }
-
-    /* ---------- CREDENTIALS ---------- */
-    .credentials {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 1rem;
-      margin: 2rem 0;
-    }
-
-    .credential {
-      background: oklch(0.10 0.005 240);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 1rem;
-    }
-
-    .credential-label {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: oklch(0.45 0.015 75);
-      margin-bottom: 0.35rem;
-    }
-
-    .credential-value {
-      font-family: 'Lora', serif;
-      font-size: 0.9rem;
-      color: oklch(0.75 0.015 75);
-    }
-
-    /* ---------- QUOTE ---------- */
-    .quote {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-style: italic;
-      line-height: 1.8;
-      color: oklch(0.75 0.015 75);
-      border-left: 3px solid oklch(0.55 0.15 142);
-      padding-left: 2rem;
-      margin: 2rem 0;
-    }
-
-    .quote-author {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.85rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: oklch(0.55 0.15 142);
-      margin-top: 1rem;
-    }
-
-    /* ---------- BOOK CARDS (for Explore section) ---------- */
-    .book-card {
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      background: oklch(0.11 0.005 240);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 2rem;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .book-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 1px;
-      background: linear-gradient(to right, transparent, oklch(0.55 0.15 142), transparent);
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .book-card:hover {
-      border-color: rgba(85, 200, 100, 0.2);
-      transform: translateY(-4px);
-    }
-
-    .book-card:hover::before {
-      opacity: 1;
-    }
-
-    .book-cover {
-      width: 100%;
-      max-width: 220px;
-      height: auto;
-      aspect-ratio: 2 / 3;
-      object-fit: cover;
-      margin: 0 auto 1.5rem;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(85, 200, 100, 0.1);
-      transition: all 0.3s ease;
-    }
-
-    .book-card:hover .book-cover {
-      transform: scale(1.05) rotateY(5deg);
-      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(85, 200, 100, 0.2);
-    }
-
-    .book-genre {
-      font-family: 'DM Sans', sans-serif;
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: oklch(0.55 0.15 142);
-      margin-bottom: 0.5rem;
-    }
-
-    /* ---------- INSPIRATION TAGS ---------- */
-    .inspiration-tag {
-      padding: 0.35rem 0.875rem;
-      border: 1px solid rgba(85, 200, 100, 0.2);
-      font-family: 'Lora', serif;
-      font-size: 0.85rem;
-      font-style: italic;
-      color: oklch(0.65 0.015 75);
-      transition: all 0.2s ease;
-    }
-    .inspiration-tag:hover {
-      border-color: oklch(0.55 0.15 142);
-      color: oklch(0.92 0.015 75);
-    }
-
-    /* ---------- SOCIAL LINKS ---------- */
-    .social-links {
-      display: flex;
-      gap: 1rem;
-      list-style: none;
-      margin: 1rem 0;
-    }
-    .social-links a {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 40px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: oklch(0.65 0.015 75);
-      text-decoration: none;
-      transition: all 0.3s ease;
-      font-size: 1.2rem;
-      font-weight: bold;
-      font-family: sans-serif;
-    }
-    .social-links a:hover {
-      background: oklch(0.55 0.15 142);
-      border-color: oklch(0.55 0.15 142);
-      color: oklch(0.08 0.005 240);
-    }
-
-    /* ---------- FOOTER ---------- */
-    footer {
-      background: oklch(0.08 0.005 240);
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding: 3rem 0 2rem;
-    }
-    .footer-content {
-      display: grid;
-      gap: 3rem;
-      margin-bottom: 3rem;
-    }
-    @media (min-width: 768px) {
-      .footer-content {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-    .footer-section h3 {
-      font-size: 1rem;
-      margin-bottom: 1rem;
-    }
-    .footer-bottom {
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-      padding-top: 2rem;
-      text-align: center;
-      font-size: 0.85rem;
-      color: oklch(0.45 0.015 75);
-    }
-
-    /* ---------- REVEAL ANIMATION ---------- */
-    .reveal {
-      opacity: 0;
-      transform: translateY(30px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
-    }
-    .reveal.visible {
-      opacity: 1;
-      transform: translateY(0);
-    }
-
-    /* ---------- RESPONSIVE ---------- */
-    @media (max-width: 768px) {
-      nav {
-        padding: 1rem 1.5rem;
-      }
-      .nav-links {
-        gap: 1rem;
-      }
-      section {
-        padding: 3rem 0;
-      }
-      .quote {
-        font-size: 1.1rem;
-        padding-left: 1rem;
-      }
-    }
-  </style>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
-</head>
-<body>
-  <!-- Navigation -->
-  <nav id="navbar">
-    <a href="index.html" class="nav-brand">David J. Devine</a>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="hibernia.html">Hibernia</a></li>
-      <li><a href="uncommonwealth.html">UnCommonwealth</a></li>
-      <li><a href="author.html" class="active">Author</a></li>
-    </ul>
-  </nav>
-
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-bg" style="background-image: url('https://scontent.fnbo15-1.fna.fbcdn.net/v/t39.30808-6/481941507_122141185562548345_492269506203713002_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEDqob0Y-IY8-hHJzSc6xTW8fTuAiKrQTLx9O4CIqtBMieM8uNM4l5bnuGHbQxW9J0GgQECNoi0hmoZJToUIFq8&_nc_ohc=kdA2Qg2Mcm4Q7kNvwGBo_PI&_nc_oc=Adrq_0YFjF7AO3N2lmXUla0_Achv4qqpuyktEBGal7-ODMLfuzc1HliZ6lGNh6UeLdM&_nc_pt=5&_nc_zt=23&_nc_ht=scontent.fnbo15-1.fna&_nc_gid=EeDaUotyW2U5p0TprwXzcg&_nc_ss=7b2a8&oh=00_Af71UcSWZsbfgNt90Zfn-_PQ2gGwy0_gZ911GcoaPkt5Aw&oe=6A1A7841')"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <div class="hero-eyebrow">
-        <span class="hero-eyebrow-line"></span>
-        <span class="hero-eyebrow-text">About the Author</span>
-      </div>
-      <h1>David J. Devine</h1>
-      <p style="font-style: italic; color: oklch(0.6 0.015 75);">Novelist of suspense and place</p>
-    </div>
-  </section>
-
-  <!-- Author Bio -->
-  <section>
-    <div class="container">
-      <div class="author-grid">
-        <!-- Author Photo Column (FIXED) -->
-        <div class="author-photo-container reveal">
-          <img class="author-photo" src="https://scontent.fnbo15-1.fna.fbcdn.net/v/t39.30808-6/455934387_3695947210717413_3131541673676834122_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=6ee11a&_nc_eui2=AeHLYz3xbci11X0Syfaub1Kit8MwLjRDDSK3wzAuNEMNIs3UzHuTrAfCU4rR3fDlTX79fSmWyhFaex3fanVoFk1a&_nc_ohc=_s_oIFjdvvQQ7kNvwGPKwox&_nc_oc=Adpye1HC--9Qs9EaG-U3973qUe0mXD5fzaC1nY1ZyVO7A9k87yEAU_P417A92eRK_4U&_nc_pt=5&_nc_zt=23&_nc_ht=scontent.fnbo15-1.fna&_nc_gid=XdvcQgiemc1ws_xYGvAqKQ&_nc_ss=7b2a8&oh=00_Af9Fk6RihhTV6l063n4PJPvlS6rpphhkxPRiihEDDGQXhQ&oe=6A286D65" alt="David J. Devine portrait">
-          <div class="author-location">
-            <span>📍</span>
-            <span>Lockport, NY</span>
-          </div>
-        </div>
-        
-        <!-- Bio Text -->
-        <div class="reveal">
-          <p style="font-size: 1.1rem; line-height: 1.85;">
-            David Devine is a second-generation Irish-American and American/Grenadian novelist who writes fact-based fiction. A native of San Francisco, he was raised in Marin County and earned a Bachelor of Science in Industrial Engineering & Operations Research from UC Berkeley. He has worked in ocean transportation, management consulting in Silicon Valley, and owned a bicycle store. He is a prolific technical writer who began creative writing with short stories before publishing his debut novel, Hibernia.
-          </p>
-          
-          <p style="font-size: 1.1rem; line-height: 1.85;">
-            His debut novel, <strong>Hibernia</strong>, is a heist thriller set in Dublin and San Francisco. It explores the true financial loophole of €300 million in unclaimed Irish pounds sitting in a Central Bank vault — a story deeply personal to David, whose father worked for the Hibernia Bank.
-          </p>
-          
-          <p style="font-size: 1.1rem; line-height: 1.85;">
-            His latest novel, <strong>UnCommonwealth</strong>, is a political thriller set in Grenada during the 50th anniversary of its independence. The story follows Oisin Finnegan, a disavowed spy and scientist, and Patricia Arnold, a marine biologist, as they uncover a deadly conspiracy. The inspiration came from watching the Jubilee celebration with his Grenadian wife.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Inspirations -->
-  <section class="alt">
-    <div class="container">
-      <h2 style="margin-bottom: 2rem;">Draws Inspiration From</h2>
-      <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3rem;">
-        <span class="inspiration-tag">Julia Child</span>
-        <span class="inspiration-tag">Lee Trevino</span>
-        <span class="inspiration-tag">W.C. Fields</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Credentials -->
-  <section>
-    <div class="container">
-      <h2 style="margin-bottom: 2rem;">Background</h2>
-      <div class="credentials">
-        <div class="credential">
-          <div class="credential-label">Heritage</div>
-          <div class="credential-value">Irish-American / American-Grenadian</div>
-        </div>
-        <div class="credential">
-          <div class="credential-label">Education</div>
-          <div class="credential-value">UC Berkeley (Industrial Engineering)</div>
-        </div>
-        <div class="credential">
-          <div class="credential-label">Residence</div>
-          <div class="credential-value">Lockport, NY & St. John, Grenada</div>
-        </div>
-        <div class="credential">
-          <div class="credential-label">Debut</div>
-          <div class="credential-value">Hibernia (2024)</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Quote -->
-  <section class="alt">
-    <div class="container">
-      <blockquote class="quote" style="text-align: center; border-left: none; padding-left: 0;">
-        "I write for readers who love the texture of a place — the wet wool of Dublin rain or the sweet heat of a nutmeg plantation. My novels are just engineering reports with better endings."
-        <div class="quote-author">— David J. Devine</div>
-      </blockquote>
-    </div>
-  </section>
-
-  <!-- Explore Novels -->
-  <section>
-    <div class="container">
-      <h2 style="text-align: center; margin-bottom: 3rem;">Explore the Novels</h2>
-      <div class="grid grid-2">
-        <a href="hibernia.html" class="book-card reveal">
-          <img src="https://m.media-amazon.com/images/I/91KDk1wREdL._SL1500_.jpg" alt="Hibernia cover" class="book-cover">
-          <div class="book-genre">Heist Thriller</div>
-          <h3>Hibernia</h3>
-          <p>€300 million in unclaimed Irish pounds. A forgotten vault. One man who knows the loophole.</p>
-        </a>
-        
-        <a href="uncommonwealth.html" class="book-card reveal">
-          <img src="https://m.media-amazon.com/images/I/91csQn4LUQL._SL1500_.jpg" alt="UnCommonwealth cover" class="book-cover">
-          <div class="book-genre">Political Thriller</div>
-          <h3>UnCommonwealth</h3>
-          <p>Grenada, 50 years of independence. A spy returns to uncover a conspiracy buried in the spice trade.</p>
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      <div class="footer-content">
-        <div class="footer-section">
-          <h3>David J. Devine</h3>
-          <p style="font-size: 0.95rem; color: oklch(0.65 0.015 75);">All stories are maps of real places.</p>
-          <ul class="social-links">
-            <li><a href="https://web.facebook.com/profile.php?id=61566450352101" target="_blank" title="Facebook">f</a></li>
-            <li><a href="https://www.linkedin.com/in/david-devine-0b3960327/" target="_blank" title="LinkedIn">in</a></li>
-            <li><a href="https://wa.me/12537200185" target="_blank" title="WhatsApp">W</a></li>
-            <li><a href="mailto:dvinedj6@gmail.com" title="Email">@</a></li>
-          </ul>
-        </div>
-        <div class="footer-section">
-          <h3>Contact</h3>
-          <p style="font-size: 0.95rem; color: oklch(0.65 0.015 75); margin-bottom: 1rem;">
-            <strong>Locations:</strong><br>
-            Lockport, NY, USA<br>
-            St. John, Grenada
-          </p>
-          <p style="font-size: 0.95rem;">
-            <a href="mailto:dvinedj6@gmail.com" style="color: oklch(0.55 0.15 142); text-decoration: none;">dvinedj6@gmail.com</a>
-          </p>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 David J. Devine. All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Navbar scroll effect
-    const navbar = document.getElementById('navbar');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
-      }
-    });
-
-    // Reveal animations on scroll
-    const revealElements = document.querySelectorAll('.reveal');
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, { threshold: 0.1 });
-    revealElements.forEach(el => observer.observe(el));
-  </script>
-</body>
-</html>
+/* David J. Devine Author Website
+ * Cinematic Thriller Design - Vanilla HTML/CSS/JS
+ * Green accent color, real photography, premium feel
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Lora', serif;
+  background: oklch(0.08 0.005 240);
+  color: oklch(0.92 0.015 75);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  line-height: 1.1;
+}
+
+h1 {
+  font-size: clamp(2.8rem, 7vw, 5.5rem);
+  margin-bottom: 1.5rem;
+}
+
+h2 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1.5rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+p {
+  font-size: 1.05rem;
+  line-height: 1.85;
+  margin-bottom: 1.5rem;
+  color: oklch(0.68 0.015 75);
+}
+
+strong {
+  color: oklch(0.82 0.015 75);
+  font-weight: 600;
+}
+
+em {
+  font-style: italic;
+  color: oklch(0.55 0.15 142);
+}
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  padding: 1.5rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+nav.scrolled {
+  background: rgba(8, 9, 14, 0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem 2rem;
+}
+
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  color: oklch(0.92 0.015 75);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.nav-brand::before {
+  content: '';
+  display: block;
+  width: 8px;
+  height: 8px;
+  background: oklch(0.55 0.15 142);
+  border-radius: 50%;
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: oklch(0.65 0.015 75);
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: oklch(0.55 0.15 142);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: oklch(0.92 0.015 75);
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a.active {
+  color: oklch(0.55 0.15 142);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden;
+  padding-top: 6rem;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  z-index: -2;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(8,9,14,0.92) 0%, rgba(8,9,14,0.75) 40%, rgba(8,9,14,0.6) 60%, rgba(8,9,14,0.85) 100%),
+              linear-gradient(to bottom, rgba(8,9,14,0.3) 0%, rgba(8,9,14,0) 30%, rgba(8,9,14,0) 60%, rgba(8,9,14,0.8) 100%);
+  z-index: -1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideUp 0.7s ease 0.1s forwards;
+}
+
+.hero-eyebrow-line {
+  display: block;
+  width: 2.5rem;
+  height: 1px;
+  background: oklch(0.55 0.15 142);
+}
+
+.hero-eyebrow-text {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: oklch(0.55 0.15 142);
+}
+
+.hero h1 {
+  opacity: 0;
+  transform: translateY(32px);
+  animation: slideUp 0.8s ease 0.25s forwards;
+}
+
+.hero-subtitle {
+  max-width: 38rem;
+  margin-bottom: 2.5rem;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: slideUp 0.8s ease 0.4s forwards;
+}
+
+.hero-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: slideUp 0.8s ease 0.55s forwards;
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border: 2px solid oklch(0.55 0.15 142);
+  background: transparent;
+  color: oklch(0.55 0.15 142);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: oklch(0.55 0.15 142);
+  z-index: -1;
+  transition: left 0.3s ease;
+}
+
+.btn:hover {
+  color: oklch(0.08 0.005 240);
+  transform: translateY(-2px);
+}
+
+.btn:hover::before {
+  left: 0;
+}
+
+.btn-primary {
+  background: oklch(0.55 0.15 142);
+  color: oklch(0.08 0.005 240);
+  border-color: oklch(0.55 0.15 142);
+}
+
+.btn-primary::before {
+  background: oklch(0.42 0.12 142);
+}
+
+.btn-primary:hover {
+  color: oklch(0.92 0.015 75);
+}
+
+/* Container */
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Section */
+section {
+  padding: 6rem 0;
+}
+
+section.alt {
+  background: oklch(0.10 0.005 240);
+}
+
+/* Grid */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.grid-2 {
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+@media (min-width: 1024px) {
+  .grid-2 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Card */
+.card {
+  background: oklch(0.11 0.005 240);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 2rem;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(to right, transparent, oklch(0.55 0.15 142), transparent);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(85, 200, 100, 0.2);
+  transform: translateY(-4px);
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+/* Book Card */
+.book-card {
+  text-align: center;
+}
+
+.book-cover {
+  width: 100%;
+  max-width: 280px;
+  margin: 0 auto 1.5rem;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(85, 200, 100, 0.1);
+  transition: all 0.3s ease;
+}
+
+.book-card:hover .book-cover {
+  transform: scale(1.05) rotateY(5deg);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(85, 200, 100, 0.2);
+}
+
+.book-genre {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: oklch(0.55 0.15 142);
+  margin-bottom: 0.5rem;
+}
+
+.book-card h3 {
+  margin-bottom: 1rem;
+}
+
+.book-card p {
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+/* Reveal animation */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+/* Quote */
+.quote {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-style: italic;
+  line-height: 1.8;
+  color: oklch(0.75 0.015 75);
+  border-left: 3px solid oklch(0.55 0.15 142);
+  padding-left: 2rem;
+  margin: 3rem 0;
+}
+
+.quote-author {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(0.55 0.15 142);
+  margin-top: 1rem;
+}
+
+/* Author Section */
+.author-grid {
+  display: grid;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .author-grid {
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
+.author-photo {
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(85, 200, 100, 0.15);
+  filter: grayscale(15%);
+}
+
+.author-location {
+  position: absolute;
+  bottom: 1rem;
+  left: 1rem;
+  background: rgba(8, 9, 14, 0.9);
+  backdrop-filter: blur(8px);
+  padding: 0.5rem 0.875rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: oklch(0.65 0.015 75);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.credentials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.credential {
+  background: oklch(0.10 0.005 240);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 1rem;
+}
+
+.credential-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: oklch(0.45 0.015 75);
+  margin-bottom: 0.35rem;
+}
+
+.credential-value {
+  font-family: 'Lora', serif;
+  font-size: 0.9rem;
+  color: oklch(0.75 0.015 75);
+}
+
+/* Footer */
+footer {
+  background: oklch(0.08 0.005 240);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 4rem 0 2rem;
+}
+
+.footer-content {
+  display: grid;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 768px) {
+  .footer-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.footer-section h3 {
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links {
+  list-style: none;
+}
+
+.footer-links li {
+  margin-bottom: 0.5rem;
+}
+
+.footer-links a {
+  color: oklch(0.65 0.015 75);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+  color: oklch(0.55 0.15 142);
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 1rem 0;
+}
+
+.social-links a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: oklch(0.65 0.015 75);
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  background: oklch(0.55 0.15 142);
+  border-color: oklch(0.55 0.15 142);
+  color: oklch(0.08 0.005 240);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 2rem;
+  text-align: center;
+  font-size: 0.85rem;
+  color: oklch(0.45 0.015 75);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .nav-links {
+    gap: 1rem;
+    font-size: 0.65rem;
+  }
+
+  .hero {
+    padding-top: 5rem;
+  }
+
+  .hero-ctas {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  section {
+    padding: 4rem 0;
+  }
+
+  .author-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: oklch(0.55 0.15 142);
+  animation: bounce 2s infinite;
+}
+
+.scroll-indicator svg {
+  width: 20px;
+  height: 20px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(8px);
+  }
+}
