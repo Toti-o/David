@@ -1,6 +1,8 @@
 /* David J. Devine Author Website
  * Cinematic Thriller Design - Vanilla HTML/CSS/JS
  * Green accent color, real photography, premium feel
+ * FIXED: Image placement, responsiveness, overflow
+ * ADDED: Book detail page image alignment
  */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Lora:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap');
@@ -156,11 +158,13 @@ nav.scrolled {
   padding-top: 6rem;
 }
 
+/* FIXED: Hero background image – cover properly, no distortion */
 .hero-bg {
   position: absolute;
   inset: 0;
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   z-index: -2;
 }
 
@@ -364,11 +368,18 @@ section.alt {
 /* Book Card */
 .book-card {
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
+/* FIXED: Book cover – proper sizing, object-fit, no overflow */
 .book-cover {
   width: 100%;
   max-width: 280px;
+  height: auto;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
   margin: 0 auto 1.5rem;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(85, 200, 100, 0.1);
   transition: all 0.3s ease;
@@ -443,9 +454,15 @@ section.alt {
   }
 }
 
+/* FIXED: Author photo – proper sizing, centered on mobile, object-fit */
 .author-photo {
   width: 100%;
   max-width: 380px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+  margin: 0 auto;
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(85, 200, 100, 0.15);
   filter: grayscale(15%);
 }
@@ -601,6 +618,11 @@ footer {
   .author-grid {
     grid-template-columns: 1fr;
   }
+  
+  /* smaller book covers on mobile */
+  .book-cover {
+    max-width: 220px;
+  }
 }
 
 /* Scroll indicator */
@@ -635,5 +657,54 @@ footer {
   }
   50% {
     transform: translateX(-50%) translateY(8px);
+  }
+}
+
+/* ============================================
+   BOOK DETAIL PAGES – PERFECT IMAGE ALIGNMENT
+   (overrides inline styles, no HTML changes needed)
+   ============================================ */
+
+/* Target any image inside a book detail grid – typically the cover */
+section .grid-2 img:first-child,
+.book-detail-grid img,
+.reveal > img[style*="max-width: 300px"] {
+  width: 100% !important;
+  max-width: 280px !important;
+  height: auto !important;
+  aspect-ratio: 2 / 3;
+  object-fit: cover;
+  display: block;
+  margin: 0 auto 2rem auto !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  border-radius: 2px;
+}
+
+/* For the purchase box next to the cover – ensure it stays aligned */
+@media (min-width: 768px) {
+  .grid-2 {
+    align-items: start;
+  }
+  
+  /* Fix vertical alignment of cover column */
+  .grid-2 > div:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  
+  /* Purchase box should not stretch weirdly */
+  .grid-2 > div:first-child > div {
+    width: 100%;
+    max-width: 300px;
+  }
+}
+
+/* Mobile – smaller cover */
+@media (max-width: 767px) {
+  section .grid-2 img:first-child,
+  .reveal > img[style*="max-width: 300px"] {
+    max-width: 220px !important;
   }
 }
